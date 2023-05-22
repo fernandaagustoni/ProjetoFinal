@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ProjetoFinal</string>
+    <string name="app_name">App reembolso</string>
+    <string name="hint_username">Nome de usuário</string>
+    <string name="btn_login">Entrar</string>
+    <string name="check_remember_login">Lembrar informações de login</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_password_confirmation">Confirme a senha</string>
+    <string name="btn_save_user">Salva Usuário</string>
 </resources>
