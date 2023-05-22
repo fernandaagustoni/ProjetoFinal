@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:padding="16dp"
+    tools:context=".view.UserAddActivity">
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_username"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_username"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_password"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_password"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintTop_toBottomOf="@id/edittext_new_username" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_confirm_password"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_password_confirmation"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintTop_toBottomOf="@id/edittext_new_password" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_save_user"
+        android:layout_marginBottom="64dp"
+        android:text="@string/btn_save_user"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
