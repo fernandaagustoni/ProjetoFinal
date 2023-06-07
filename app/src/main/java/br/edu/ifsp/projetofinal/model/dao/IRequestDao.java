@@ -5,7 +5,6 @@ import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.model.entities.User;
 
 public interface IRequestDao {
-
     void create(Request request);
     boolean update(String status, Request request);
     boolean delete(Request request);

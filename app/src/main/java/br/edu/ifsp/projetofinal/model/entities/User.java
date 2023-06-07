@@ -12,7 +12,6 @@ public class User {
         request = new ArrayList<>();
     }
 
-
     public User(String username, String password, boolean is_admin) {
         this.username = username;
         this.password = password;
