@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">App reembolso</string>
     <string name="hint_username">Nome de usuário</string>
+    <string name="hint_fullname">Nome completo</string>
+    <string name="hint_email">Email</string>
     <string name="btn_login">Entrar</string>
     <string name="check_remember_login">Lembrar informações de login</string>
     <string name="hint_password">Senha</string>
