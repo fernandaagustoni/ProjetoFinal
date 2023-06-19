@@ -6,6 +6,7 @@ public class Request {
     private String origem;
     private String destino;
     private Date dataViagem;
+    private String dataViagem1;
     private String anexoNotaFiscal;
     private String anexoKmAntes;
     private String anexoKmDepois;
@@ -17,6 +18,15 @@ public class Request {
         this.origem = origem;
         this.destino = destino;
         this.dataViagem = dataViagem;
+        this.anexoNotaFiscal = anexoNotaFiscal;
+        this.anexoKmAntes = anexoKmAntes;
+        this.anexoKmDepois = anexoKmDepois;
+        this.status = status;
+    }
+    public Request(String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+        this.origem = origem;
+        this.destino = destino;
+        this.dataViagem1 = dataViagem;
         this.anexoNotaFiscal = anexoNotaFiscal;
         this.anexoKmAntes = anexoKmAntes;
         this.anexoKmDepois = anexoKmDepois;

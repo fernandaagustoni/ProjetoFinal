@@ -2,6 +2,8 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +17,8 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
 
     private RequestMVP.Presenter presenter;
     private FloatingActionButton createNewRequestButton;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +27,11 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
         findViews();
         setListener();
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.populateList(recyclerView);
+    }
     @Override
     protected void onDestroy() {
         presenter.deatach();
@@ -43,9 +51,9 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
     public void close() {
 
     }
-
     private void findViews(){
         this.createNewRequestButton = findViewById(R.id.btn_new_request);
+        recyclerView = findViewById(R.id.recyler_view);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

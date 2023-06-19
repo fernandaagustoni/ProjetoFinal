@@ -34,7 +34,6 @@ public class UserAddPresenter implements UserAddMVP.Presenter {
         }catch (UserDuplicatedException e){
             Log.v("SaveUser", "Usuario duplicado");
         }
-
         view.close();
     }
 
