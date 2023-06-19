@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.LoginMVP;
 import br.edu.ifsp.projetofinal.presenter.LoginPresenter;

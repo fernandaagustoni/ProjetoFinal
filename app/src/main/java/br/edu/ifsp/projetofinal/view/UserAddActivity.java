@@ -1,9 +1,10 @@
 package br.edu.ifsp.projetofinal.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
         presenter = new UserAddPresenter(this);
         findViews();
         setListener();
+        setToolbar();
     }
 
     @Override
@@ -81,6 +83,15 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
         confirmButton.setOnClickListener(this);
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void setToolbar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
 }

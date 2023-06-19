@@ -12,4 +12,8 @@
     <string name="hint_to">Destino</string>
     <string name="hint_date">Data da viagem</string>
     <string name="hint_attachment">Anexo nota fiscal</string>
+    <string name="hint_attachment_km_b">Anexo quilometragem antes</string>
+    <string name="hint_attachment_km_a">Anexo quilometragem depois</string>
+    <string name="hint_status">Status</string>
+    <string name="btn_save_request">Enviar requisição</string>
 </resources>

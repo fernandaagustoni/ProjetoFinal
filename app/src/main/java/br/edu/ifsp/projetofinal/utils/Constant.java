@@ -1,7 +1,5 @@
 package br.edu.ifsp.projetofinal.utils;
 
-import java.util.Date;
-
 public class Constant {
     public static final String USER = "user";
     public static final String FULLNAME = "fullname";

@@ -1,7 +1,6 @@
 package br.edu.ifsp.projetofinal.model.entities;
 
 import java.util.Date;
-
 public class Request {
     private Integer id;
     private String origem;

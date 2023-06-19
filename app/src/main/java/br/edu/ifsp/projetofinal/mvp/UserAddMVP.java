@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
-
 public interface UserAddMVP {
     interface View{
         Context getContext();

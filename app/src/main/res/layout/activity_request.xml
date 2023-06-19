@@ -12,7 +12,7 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_new_contact"
+        android:id="@+id/btn_new_request"
         android:backgroundTint="@color/btn_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.presenter;
 
 import android.content.Intent;
 import android.util.Log;
-
 import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.User;
