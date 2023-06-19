@@ -1,14 +1,13 @@
 package br.edu.ifsp.projetofinal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.UserAddMVP;
 import br.edu.ifsp.projetofinal.presenter.UserAddPresenter;
@@ -41,9 +40,12 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
     public void onClick(View view) {
         if (view == confirmButton){
             if (presenter.checkPassword(passwordEditText.getText().toString(), confirmPasswordEditText.getText().toString())){
-                presenter.saveUser(fullNameEditText.getText().toString(), emailEditText.getText().toString(),
-                        usernameEditText.getText().toString(), passwordEditText.getText().toString(),
-                        false);
+
+                presenter.saveUser(fullNameEditText.getText().toString(),
+                        emailEditText.getText().toString(),
+                        usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(), false);
+
             } else{
                 Toast.makeText(this, "As senhas não estão iguais.", Toast.LENGTH_SHORT).show();
             }
@@ -69,7 +71,7 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
 
         fullNameEditText = findViewById(R.id.edittext_full_name);
         emailEditText = findViewById(R.id.edittext_email);
-        usernameEditText = findViewById(R.id.edittext_username);
+        usernameEditText = findViewById(R.id.edittext_new_username);
         passwordEditText = findViewById(R.id.edittext_new_password);
         confirmPasswordEditText = findViewById(R.id.edittext_new_confirm_password);
         confirmButton = findViewById(R.id.button_save_user);
@@ -78,5 +80,7 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
     private void setListener(){
         confirmButton.setOnClickListener(this);
     }
+
+
 
 }

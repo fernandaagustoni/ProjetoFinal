@@ -10,6 +10,20 @@ public class Request {
     private String anexoNotaFiscal;
     private String anexoKmAntes;
     private String anexoKmDepois;
+
+    private String status;
+
+    public Request(Integer id, String origem, String destino, Date dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+        this.id = id;
+        this.origem = origem;
+        this.destino = destino;
+        this.dataViagem = dataViagem;
+        this.anexoNotaFiscal = anexoNotaFiscal;
+        this.anexoKmAntes = anexoKmAntes;
+        this.anexoKmDepois = anexoKmDepois;
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -49,7 +63,6 @@ public class Request {
     public void setAnexoNotaFiscal(String anexoNotaFiscal) {
         this.anexoNotaFiscal = anexoNotaFiscal;
     }
-
     public String getAnexoKmAntes() {
         return anexoKmAntes;
     }

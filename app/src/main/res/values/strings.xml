@@ -8,4 +8,8 @@
     <string name="hint_password">Senha</string>
     <string name="hint_password_confirmation">Confirme a senha</string>
     <string name="btn_save_user">Salva Usuário</string>
+    <string name="hint_from">Origem</string>
+    <string name="hint_to">Destino</string>
+    <string name="hint_date">Data da viagem</string>
+    <string name="hint_attachment">Anexo nota fiscal</string>
 </resources>

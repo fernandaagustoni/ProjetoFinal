@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Constant {
     public static final String USER = "user";
+    public static final String FULLNAME = "fullname";
+    public static final String EMAIL = "email";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String IS_ADMIN = "is_admin";

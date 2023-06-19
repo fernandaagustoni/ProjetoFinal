@@ -17,7 +17,7 @@ public class RequestDaoSQLite implements  IRequestDao{
 
     public static String createTable(){
         String sql = "CREATE TABLE " + Constant.REQUEST + "(";
-        sql += Constant.ID_REQUEST + " INTEGER PRIMARY KEY, ";
+        sql += Constant.ID_REQUEST + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
         sql += Constant.ORIGEM + " TEXT NOT NULL, ";
         sql += Constant.DESTINO + " TEXT NOT NULL, ";
         sql += Constant.DATA_VIAGEM + " DATE NOT NULL ";
@@ -29,7 +29,6 @@ public class RequestDaoSQLite implements  IRequestDao{
 
     @Override
     public void create(Request request) {
-
     }
     @Override
     public boolean update(String status, Request request) {

@@ -23,8 +23,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         switch (oldVersion){
             case 1:
                 //renomeia a table article para article_old
-                sql = "ALTER TABLE " + Constant.USERNAME;
-                sql += " RENAME TO " + Constant.USERNAME + "_old";
+                sql = "ALTER TABLE " + Constant.USER;
+                sql += " RENAME TO " + Constant.USER + "_old";
                 db.execSQL(sql);
 
                 //criar a nova table article
@@ -33,10 +33,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 //insere todos os dados já cadastrados na tabela nova
                 sql = "INSERT INTO " + Constant.USER + " (";
                 sql += Constant.USERNAME + ", ";
+                sql += Constant.FULLNAME + ", ";
+                sql += Constant.EMAIL + ", ";
                 sql += Constant.PASSWORD + ", ";
                 sql += Constant.IS_ADMIN + ") ";
                 sql += "SELECT ";
                 sql += Constant.USERNAME + ", ";
+                sql += Constant.FULLNAME + ", ";
+                sql += Constant.EMAIL + ", ";
                 sql += Constant.PASSWORD + ", ";
                 sql += Constant.IS_ADMIN;
                 sql += " FROM " + Constant.USER + "_old";

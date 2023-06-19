@@ -12,7 +12,10 @@
         android:theme="@style/Theme.ProjetoFinal"
         tools:targetApi="31">
         <activity
-            android:name=".NewUser"
+            android:name=".RequestAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.RequestActivity"
             android:exported="false" />
         <activity
             android:name=".view.UserAddActivity"

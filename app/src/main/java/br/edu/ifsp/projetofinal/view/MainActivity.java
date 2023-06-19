@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.View{
     private LoginMVP.Presenter presenter;
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private EditText fullnameEditText;
-    private EditText emailEditText;
     private CheckBox mPreferences;
     private Button confirmButton;
     private FloatingActionButton createUserButton;
@@ -48,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.View{
         this.mPreferences = findViewById(R.id.check_remember_login);
         this.confirmButton = findViewById(R.id.button_login);
         this.createUserButton = findViewById(R.id.btn_add_user);
-        this.fullnameEditText = findViewById(R.id.edittext_full_name);
-        this.emailEditText = findViewById(R.id.edittext_email);
     }
     private void setListener(){
         confirmButton.setOnClickListener(new View.OnClickListener() {

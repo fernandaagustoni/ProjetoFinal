@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.RequestAddActivity">
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_from"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_from"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_to"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_to"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_from"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_from"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_date"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_date"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_to"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_to"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_to"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_attachment"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_attachment"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_date"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_date"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_date" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_save_user"
+        android:layout_marginBottom="64dp"
+        android:text="@string/btn_save_user"
+        app:layout_constraintStart_toStartOf="@id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@id/edittext_from"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

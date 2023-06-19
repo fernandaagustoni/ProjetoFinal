@@ -7,6 +7,7 @@ import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.LoginMVP;
+import br.edu.ifsp.projetofinal.view.RequestActivity;
 import br.edu.ifsp.projetofinal.view.UserAddActivity;
 
 public class LoginPresenter implements LoginMVP.Presenter{
@@ -41,7 +42,8 @@ public class LoginPresenter implements LoginMVP.Presenter{
 
     @Override
     public void openRequestForm() {
-
+        Intent intent = new Intent(view.getContext(), RequestActivity.class);
+        view.getContext().startActivity(intent);
     }
 
 }

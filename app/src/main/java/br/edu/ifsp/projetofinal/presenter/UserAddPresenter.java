@@ -27,6 +27,7 @@ public class UserAddPresenter implements UserAddMVP.Presenter {
 
     @Override
     public void saveUser(String fullname, String email, String username, String password, Boolean is_admin) {
+        Log.v("", "Save user" + fullname + " " + email + " " + username + " " + password + " " + is_admin);
         user = new User(fullname, email, username, password, is_admin);
         try {
             userDao.create(user);
