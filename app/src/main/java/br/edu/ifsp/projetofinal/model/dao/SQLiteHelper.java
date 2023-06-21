@@ -14,7 +14,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = UserDaoSQLite.createTable();
+        String sql2 = RequestDaoSQLite.createTable();
         db.execSQL(sql);
+        db.execSQL(sql2);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -22,12 +24,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         switch (oldVersion){
             case 1:
-                //renomeia a table article para article_old
+                //renomeia a table user para article_old
                 sql = "ALTER TABLE " + Constant.USER;
                 sql += " RENAME TO " + Constant.USER + "_old";
                 db.execSQL(sql);
 
-                //criar a nova table article
+                //criar a nova table user
                 db.execSQL(UserDaoSQLite.createTable());
 
                 //insere todos os dados já cadastrados na tabela nova

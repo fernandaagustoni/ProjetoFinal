@@ -5,15 +5,14 @@ public class Request {
     private Integer id;
     private String origem;
     private String destino;
-    private Date dataViagem;
-    private String dataViagem1;
+    private String dataViagem;
     private String anexoNotaFiscal;
     private String anexoKmAntes;
     private String anexoKmDepois;
-
     private String status;
 
-    public Request(Integer id, String origem, String destino, Date dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+
+    public Request(Integer id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
         this.id = id;
         this.origem = origem;
         this.destino = destino;
@@ -26,7 +25,7 @@ public class Request {
     public Request(String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
         this.origem = origem;
         this.destino = destino;
-        this.dataViagem1 = dataViagem;
+        this.dataViagem = dataViagem;
         this.anexoNotaFiscal = anexoNotaFiscal;
         this.anexoKmAntes = anexoKmAntes;
         this.anexoKmDepois = anexoKmDepois;
@@ -57,11 +56,11 @@ public class Request {
         this.destino = destino;
     }
 
-    public Date getDataViagem() {
+    public String getDataViagem() {
         return dataViagem;
     }
 
-    public void setDataViagem(Date dataViagem) {
+    public void setDataViagem(String dataViagem) {
         this.dataViagem = dataViagem;
     }
 
@@ -86,5 +85,12 @@ public class Request {
 
     public void setAnexoKmDepois(String anexoKmDepois) {
         this.anexoKmDepois = anexoKmDepois;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

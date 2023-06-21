@@ -2,23 +2,29 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Calendar;
+
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
 
 
 public class RequestAddActivity extends AppCompatActivity implements RequestMVP.View, View.OnClickListener{
-
     private RequestMVP.Presenter presenter;
     private EditText fromEditText;
     private EditText toEditText;
-    private EditText dateEditText;
+    private TextView dateEditText;
     private EditText attachmentEditText;
     private EditText attachmentKmBEditText;
     private EditText attachmentKmAEditText;
@@ -78,6 +84,29 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
 
     private void setListener(){
         confirmButton.setOnClickListener(this);
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(RequestAddActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                dateEditText.setBackground(null);
+                                String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year ;
+                                dateEditText.setText(date);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+
+
+
+        });
     }
 
     @Override

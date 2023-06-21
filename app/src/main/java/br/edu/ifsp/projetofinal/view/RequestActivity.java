@@ -14,7 +14,6 @@ import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
 
 public class RequestActivity extends AppCompatActivity implements RequestMVP.View{
-
     private RequestMVP.Presenter presenter;
     private FloatingActionButton createNewRequestButton;
     private RecyclerView recyclerView;
@@ -23,11 +22,10 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
-        presenter = new RequestPresenter(this);
         findViews();
         setListener();
+        presenter = new RequestPresenter(this);
     }
-    @Override
     protected void onStart() {
         super.onStart();
         presenter.populateList(recyclerView);

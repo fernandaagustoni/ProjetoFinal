@@ -12,6 +12,7 @@ public class Constant {
     public static final String ORIGEM = "origem";
     public static final String DESTINO = "destino";
     public static final String DATA_VIAGEM = "data_viagem";
+    public static final String STATUS = "status";
     public static final String ANEXO_NOTA= "anexo_nota";
     public static final String ANEXO_KM_ANTES= "anexo_km_antes";
     public static final String ANEXO_KM_DEPOIS= "anexo_km_depois";

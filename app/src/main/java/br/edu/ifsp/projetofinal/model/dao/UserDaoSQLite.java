@@ -11,7 +11,6 @@ import br.edu.ifsp.projetofinal.utils.Constant;
 public class UserDaoSQLite implements IUserDao {
     private SQLiteHelper mHelper;
     private SQLiteDatabase mDatabase;
-
     public UserDaoSQLite(Context context) {
         mHelper = new SQLiteHelper(context);
     }
@@ -26,7 +25,6 @@ public class UserDaoSQLite implements IUserDao {
         sql += "CHECK(" + Constant.IS_ADMIN + " IN(0, 1)))";
         return sql;
     }
-
 
     @Override
     public void create(User user) throws UserDuplicatedException {
