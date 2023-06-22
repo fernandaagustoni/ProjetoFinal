@@ -6,13 +6,13 @@ import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.LoginMVP;
+import br.edu.ifsp.projetofinal.utils.Cryptography;
 import br.edu.ifsp.projetofinal.view.RequestActivity;
 import br.edu.ifsp.projetofinal.view.UserAddActivity;
 
 public class LoginPresenter implements LoginMVP.Presenter{
     private LoginMVP.View view;
     private IUserDao userDao;
-    public User user;
 
     public LoginPresenter (LoginMVP.View view){
         this.view = view;
@@ -24,12 +24,15 @@ public class LoginPresenter implements LoginMVP.Presenter{
     }
     @Override
     public boolean autenticate(String username, String password) {
-        if(userDao.validateUser(username, password)){
-            openRequestForm();
-            return true;
-        } else {
+        password = Cryptography.encrypt(password);
+        boolean result = userDao.validateUser(username, password);
+        Log.v("testelogin","user " + username + " password " + password );
+        if (!result) {
             Log.d("Erro", "Senha Incorreta");
             return false;
+        } else {
+            openRequestForm();
+            return true;
         }
     }
 

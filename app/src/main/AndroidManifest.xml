@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ProjetoFinal"
         tools:targetApi="31">
         <activity
+            android:name=".UserEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.RequestAddActivity"
             android:exported="false" />
         <activity

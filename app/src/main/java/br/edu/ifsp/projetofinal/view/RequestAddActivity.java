@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,9 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.Calendar;
-
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
@@ -38,6 +35,7 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
         findViews();
         setListener();
         setToolbar();
+        setMenu();
     }
     @Override
     protected void onDestroy() {
@@ -117,6 +115,11 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
         return super.onOptionsItemSelected(item);
     }
     private void setToolbar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void setMenu() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

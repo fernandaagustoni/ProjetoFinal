@@ -1,20 +1,25 @@
 package br.edu.ifsp.projetofinal.view;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
 
 public class RequestActivity extends AppCompatActivity implements RequestMVP.View{
     private RequestMVP.Presenter presenter;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private FloatingActionButton createNewRequestButton;
     private RecyclerView recyclerView;
 
@@ -25,6 +30,7 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
         findViews();
         setListener();
         presenter = new RequestPresenter(this);
+        showMenu();
     }
     protected void onStart() {
         super.onStart();
@@ -51,14 +57,23 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
     }
     private void findViews(){
         this.createNewRequestButton = findViewById(R.id.btn_new_request);
+        drawerLayout = findViewById(R.id.activity_request);
         recyclerView = findViewById(R.id.recyler_view);
     }
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
-            finish();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
     private void setListener(){
         createNewRequestButton.setOnClickListener(new View.OnClickListener() {
@@ -67,5 +82,50 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
                 presenter.openNewRequest();
             }
         });
+    }
+    @Override
+    public void setMenu() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void showMenu() {
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(
+                menuItem -> {
+                    int itemId = menuItem.getItemId();
+                    Intent intentItem;
+                    switch (itemId) {
+                        case R.id.nav_item1:
+                            intentItem = new Intent(this, RequestActivity.class);
+                            startActivity(intentItem);
+                            break;
+
+                        case R.id.nav_item2:
+                            intentItem = new Intent(this, RequestAddActivity.class);
+                            startActivity(intentItem);
+                            break;
+
+                        case R.id.nav_item3:
+                            intentItem = new Intent(this, UserEditActivity.class);
+                            startActivity(intentItem);
+                            break;
+
+                        case R.id.nav_item4:
+                            intentItem = new Intent(this,MainActivity.class);
+                            startActivity(intentItem);
+                            break;
+                    }
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                });
     }
 }

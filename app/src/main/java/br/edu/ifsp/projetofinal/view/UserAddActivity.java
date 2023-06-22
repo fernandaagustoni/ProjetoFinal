@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import br.edu.ifsp.projetofinal.R;
+import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.UserAddMVP;
 import br.edu.ifsp.projetofinal.presenter.UserAddPresenter;
+import br.edu.ifsp.projetofinal.utils.Cryptography;
 
 public class UserAddActivity extends AppCompatActivity implements UserAddMVP.View, View.OnClickListener{
     private UserAddMVP.Presenter presenter;
@@ -42,12 +45,7 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
     public void onClick(View view) {
         if (view == confirmButton){
             if (presenter.checkPassword(passwordEditText.getText().toString(), confirmPasswordEditText.getText().toString())){
-
-                presenter.saveUser(fullNameEditText.getText().toString(),
-                        emailEditText.getText().toString(),
-                        usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString(), false);
-
+                saveUser();
             } else{
                 Toast.makeText(this, "As senhas não estão iguais.", Toast.LENGTH_SHORT).show();
             }
@@ -70,7 +68,6 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
         finish();
     }
     private void findViews(){
-
         fullNameEditText = findViewById(R.id.edittext_full_name);
         emailEditText = findViewById(R.id.edittext_email);
         usernameEditText = findViewById(R.id.edittext_new_username);
@@ -94,4 +91,13 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void saveUser() {
+        User user = new User();
+        user.setUsername(usernameEditText.getText().toString());
+        user.setPassword(passwordEditText.getText().toString());
+        user.setFullname(fullNameEditText.getText().toString());
+        user.setEmail(emailEditText.getText().toString());
+        presenter.registerUser(user);
+        finish();
+    }
 }

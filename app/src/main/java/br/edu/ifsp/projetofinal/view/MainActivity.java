@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.View{
                 if (presenter.autenticate(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
                     Toast.makeText(getContext(), "Usuário logado com Sucesso!", Toast.LENGTH_LONG).show();
                 } else{
-                    Toast.makeText(getContext(), "Senha/Login incorreto!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Dados inválidos!", Toast.LENGTH_LONG).show();
                 }
             }
         });

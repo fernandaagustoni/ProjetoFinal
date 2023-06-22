@@ -4,23 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    public int id;
     private String username;
     private String password;
     private String fullname;
     private String email;
-    private boolean is_admin;
-    private List<Request> request;
-    private void init(){
-        request = new ArrayList<>();
-    }
+    private int is_admin;
 
-    public User(String fullname, String email, String username, String password, Boolean is_admin) {
+    public User(int id, String fullname, String email, String username, String password, int is_admin) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.email = email;
         this.is_admin = is_admin;
-        init();
+    }
+    public User(){}
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -39,11 +44,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isIs_admin() {
+    public int isIs_admin() {
         return is_admin;
     }
 
-    public void setIs_admin(boolean is_admin) {
+    public void setIs_admin(int is_admin) {
         this.is_admin = is_admin;
     }
 
@@ -63,11 +68,4 @@ public class User {
         this.email = email;
     }
 
-    public List<Request> getRequest() {
-        return request;
-    }
-
-    public void setRequest(List<Request> request) {
-        this.request = request;
-    }
 }

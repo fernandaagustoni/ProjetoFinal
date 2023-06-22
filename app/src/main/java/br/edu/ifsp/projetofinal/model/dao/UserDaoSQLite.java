@@ -1,5 +1,6 @@
 package br.edu.ifsp.projetofinal.model.dao;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import br.edu.ifsp.projetofinal.exception.UserDuplicatedException;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.utils.Constant;
+import br.edu.ifsp.projetofinal.utils.UserSession;
 
 public class UserDaoSQLite implements IUserDao {
     private SQLiteHelper mHelper;
@@ -17,7 +19,8 @@ public class UserDaoSQLite implements IUserDao {
 
     public static String createTable() {
         String sql = "CREATE TABLE " + Constant.USER + "(";
-        sql += Constant.USERNAME + " TEXT PRIMARY KEY, ";
+        sql += Constant.DATABASE_ID + " INTEGER PRIMARY KEY, ";
+        sql += Constant.USERNAME + " TEXT, ";
         sql += Constant.FULLNAME + " TEXT NOT NULL, ";
         sql += Constant.EMAIL + " TEXT NOT NULL, ";
         sql += Constant.PASSWORD + " TEXT NOT NULL, ";
@@ -27,18 +30,19 @@ public class UserDaoSQLite implements IUserDao {
     }
 
     @Override
-    public void create(User user) throws UserDuplicatedException {
+    public boolean create(User user) throws UserDuplicatedException {
         ContentValues values = new ContentValues();
         values.put(Constant.FULLNAME, user.getFullname());
         values.put(Constant.EMAIL, user.getEmail());
         values.put(Constant.USERNAME, user.getUsername());
         values.put(Constant.PASSWORD, user.getPassword());
-        values.put(Constant.IS_ADMIN, user.isIs_admin() ? 1 : 0);
+        values.put(Constant.IS_ADMIN, user.isIs_admin());
 
         mDatabase = mHelper.getWritableDatabase();
         long lines = mDatabase
                 .insert(Constant.USER, null, values);
         mDatabase.close();
+        return lines == -1 ? false : true;
     }
 
     @Override
@@ -46,12 +50,12 @@ public class UserDaoSQLite implements IUserDao {
 
         return null;
     }
-
+    @SuppressLint("Range")
     @Override
     public boolean validateUser(String username, String password) {
-        User user = null;
-        int flag = 0;
+        boolean retorno = false;
         String columns[] = new String[]{
+                Constant.DATABASE_ID,
                 Constant.USERNAME,
                 Constant.FULLNAME,
                 Constant.EMAIL,
@@ -59,9 +63,8 @@ public class UserDaoSQLite implements IUserDao {
                 Constant.IS_ADMIN,
         };
 
-        String selection = Constant.USERNAME + " = ? ";
-        selection += "AND " + Constant.FULLNAME + " = ? ";
-        String selectionArgs[] = {username, password};
+        String selection = Constant.USERNAME + " like '" + username + "'";
+        selection += "AND " + Constant.PASSWORD + " like '" + password + "'";
 
         try {
             mDatabase = mHelper.getReadableDatabase();
@@ -69,27 +72,28 @@ public class UserDaoSQLite implements IUserDao {
                     Constant.USER,
                     columns,
                     selection,
-                    selectionArgs,
+                    null,
                     null,
                     null,
                     null
             );
             if (cursor.moveToNext()) {
-                user = new User(cursor.getString(0), cursor.getString(1), cursor.getString(2),
-                        cursor.getString(3), cursor.getInt(4)==1?true:false);
-                flag = 1;
+                User user = new User();
+                UserSession.getInstance().setUser(user);
+                UserSession.getInstance().getUser().setId(cursor.getInt(cursor.getColumnIndex(Constant.DATABASE_ID)));
+                UserSession.getInstance().getUser().setUsername(cursor.getString(cursor.getColumnIndex(Constant.USERNAME)));
+                UserSession.getInstance().getUser().setFullname(cursor.getString(cursor.getColumnIndex(Constant.FULLNAME)));
+                UserSession.getInstance().getUser().setEmail(cursor.getString(cursor.getColumnIndex(Constant.EMAIL)));
+                UserSession.getInstance().getUser().setPassword(cursor.getString(cursor.getColumnIndex(Constant.PASSWORD)));
+                UserSession.getInstance().getUser().setIs_admin(cursor.getInt(cursor.getColumnIndex(Constant.IS_ADMIN)));
+                retorno = true;
             }
             cursor.close();
         } catch (Exception e) {
-            user = null;
-            return false;
+            retorno = false;
         } finally {
             mDatabase.close();
         }
-        if (flag == 0) {
-            return false;
-        }
-        return true;
+        return retorno;
     }
-
-    }
+}

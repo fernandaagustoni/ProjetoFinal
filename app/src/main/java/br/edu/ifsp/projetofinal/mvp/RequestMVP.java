@@ -11,6 +11,7 @@ public interface RequestMVP {
     interface View{
         Context getContext();
         Bundle getBundle();
+        void setMenu();
         void close();
     }
 

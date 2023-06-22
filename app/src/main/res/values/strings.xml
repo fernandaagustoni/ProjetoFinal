@@ -16,4 +16,10 @@
     <string name="hint_attachment_km_a">Anexo quilometragem depois</string>
     <string name="hint_status">Status</string>
     <string name="btn_save_request">Enviar requisição</string>
+    <string name="my_requests">Minhas solicitações</string>
+    <string name="new_request">Solicitar reembolso</string>
+    <string name="edit_user">Editar dados pessoais</string>
+    <string name="logout">Sair</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Fechar</string>
 </resources>

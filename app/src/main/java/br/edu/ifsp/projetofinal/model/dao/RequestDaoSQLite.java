@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.utils.Constant;
+import br.edu.ifsp.projetofinal.utils.UserSession;
 
 public class RequestDaoSQLite implements  IRequestDao{
     private SQLiteHelper mHelper;
@@ -20,20 +22,24 @@ public class RequestDaoSQLite implements  IRequestDao{
 
     public static String createTable(){
         String sql = "CREATE TABLE " + Constant.REQUEST + "(";
-        sql += Constant.ID_REQUEST + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
+        sql += Constant.DATABASE_ID + " INTEGER PRIMARY KEY, ";
+        sql += Constant.ID_USER + " INTEGER, ";
         sql += Constant.ORIGEM + " TEXT NOT NULL, ";
         sql += Constant.DESTINO + " TEXT NOT NULL, ";
         sql += Constant.DATA_VIAGEM + " TEXT NOT NULL, ";
         sql += Constant.STATUS + " TEXT NOT NULL, ";
         sql += Constant.ANEXO_NOTA + " TEXT NOT NULL, ";
         sql += Constant.ANEXO_KM_ANTES + " TEXT NOT NULL, ";
-        sql += Constant.ANEXO_KM_DEPOIS + " TEXT NOT NULL) ";
+        sql += Constant.ANEXO_KM_DEPOIS + " TEXT NOT NULL, ";
+        sql += "FOREIGN KEY (" + Constant.ID_USER + ") REFERENCES " + Constant.REQUEST + "(" + Constant.DATABASE_ID + "));";
         return sql;
+
     }
 
     @Override
     public void create(Request request) {
         ContentValues values = new ContentValues();
+        values.put( Constant.ID_USER, UserSession.getInstance().getUser().getId());
         values.put(Constant.ORIGEM, request.getOrigem());
         values.put(Constant.DESTINO, request.getDestino());
         values.put(Constant.DATA_VIAGEM, request.getDataViagem());
@@ -69,6 +75,10 @@ public class RequestDaoSQLite implements  IRequestDao{
 
     @Override
     public List<Request> findAll() {
+        if (Objects.equals(UserSession.getInstance().getUser().getUsername(), "")) {
+            List<Request> request = new ArrayList<>();
+            return request;
+        }
         List<Request> list = new ArrayList<>();
         Request request;
         Cursor cursor;
@@ -92,18 +102,18 @@ public class RequestDaoSQLite implements  IRequestDao{
         );
 
         while (cursor.moveToNext()){
-            request = new Request(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
-                    cursor.getString(6),
-                    cursor.getString(7)
-            );
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(Constant.DATABASE_ID));
+            String origem = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ORIGEM));
+            String destino = cursor.getString(cursor.getColumnIndexOrThrow(Constant.DESTINO));
+            String dataViagem = cursor.getString(cursor.getColumnIndexOrThrow(Constant.DATA_VIAGEM));
+            String anexoNotaFiscal = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_NOTA));
+            String anexoKmAntes = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_KM_ANTES));
+            String anexoKmDepois = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_KM_DEPOIS));
+            String status = cursor.getString(cursor.getColumnIndexOrThrow(Constant.STATUS));
+            request = new Request(id, origem, destino, dataViagem, anexoNotaFiscal, anexoKmAntes, anexoKmDepois, status);
             list.add(request);
         }
+
         cursor.close();
         mDatabase.close();
         return list;

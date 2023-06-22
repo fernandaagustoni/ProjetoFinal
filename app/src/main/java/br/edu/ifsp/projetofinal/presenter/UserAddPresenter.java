@@ -7,6 +7,7 @@ import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.UserAddMVP;
+import br.edu.ifsp.projetofinal.utils.Cryptography;
 import br.edu.ifsp.projetofinal.view.MainActivity;
 
 public class UserAddPresenter implements UserAddMVP.Presenter {
@@ -26,15 +27,15 @@ public class UserAddPresenter implements UserAddMVP.Presenter {
     }
 
     @Override
-    public void saveUser(String fullname, String email, String username, String password, Boolean is_admin) {
-        Log.v("", "Save user" + fullname + " " + email + " " + username + " " + password + " " + is_admin);
-        user = new User(fullname, email, username, password, is_admin);
+    public boolean registerUser(User user) {
+        user.setPassword(Cryptography.encrypt(user.getPassword()));
         try {
             userDao.create(user);
+            return true;
         }catch (UserDuplicatedException e){
             Log.v("SaveUser", "Usuario duplicado");
+            return false;
         }
-        view.close();
     }
 
     @Override

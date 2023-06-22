@@ -2,7 +2,7 @@ package br.edu.ifsp.projetofinal.model.entities;
 
 import java.util.Date;
 public class Request {
-    private Integer id;
+    private int id;
     private String origem;
     private String destino;
     private String dataViagem;
@@ -12,7 +12,7 @@ public class Request {
     private String status;
 
 
-    public Request(Integer id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+    public Request(int id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
         this.id = id;
         this.origem = origem;
         this.destino = destino;

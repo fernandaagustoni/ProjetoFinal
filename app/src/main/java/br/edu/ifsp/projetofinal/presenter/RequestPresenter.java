@@ -71,7 +71,7 @@ public class RequestPresenter implements RequestMVP.Presenter{
     @Override
     public void openRequest(Request request) {
         Intent intent = new Intent(view.getContext(), RequestAddActivity.class);
-        intent.putExtra(Constant.ID_REQUEST, request.getOrigem());
+        intent.putExtra(Constant.DATABASE_ID, request.getOrigem());
         view.getContext().startActivity(intent);
     }
 

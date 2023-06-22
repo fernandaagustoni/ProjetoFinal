@@ -2,6 +2,8 @@ package br.edu.ifsp.projetofinal.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
+import br.edu.ifsp.projetofinal.model.entities.User;
+
 public interface UserAddMVP {
     interface View{
         Context getContext();
@@ -10,7 +12,7 @@ public interface UserAddMVP {
     }
     interface Presenter{
         void deatach();
-        void saveUser(String fullname, String email, String username, String password, Boolean is_admin);
+        boolean registerUser(User user);
         boolean checkPassword(String password, String confirmPassword);
         void openLogin();
     }
