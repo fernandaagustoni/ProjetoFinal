@@ -13,6 +13,7 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import br.edu.ifsp.projetofinal.R;
+import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
 
@@ -22,6 +23,7 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FloatingActionButton createNewRequestButton;
     private RecyclerView recyclerView;
+    private Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
         presenter = new RequestPresenter(this);
         showMenu();
     }
+    @Override
     protected void onStart() {
         super.onStart();
         presenter.populateList(recyclerView);
@@ -49,6 +52,11 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
     @Override
     public Bundle getBundle() {
         return getIntent().getExtras();
+    }
+
+    @Override
+    public Request getRequest() {
+        return request;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package br.edu.ifsp.projetofinal.presenter;
 
-import android.content.Intent;
 import android.util.Log;
 import br.edu.ifsp.projetofinal.exception.UserDuplicatedException;
 import br.edu.ifsp.projetofinal.model.dao.IUserDao;
@@ -8,7 +7,6 @@ import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.UserAddMVP;
 import br.edu.ifsp.projetofinal.utils.Cryptography;
-import br.edu.ifsp.projetofinal.view.MainActivity;
 
 public class UserAddPresenter implements UserAddMVP.Presenter {
     private UserAddMVP.View view;
@@ -37,7 +35,6 @@ public class UserAddPresenter implements UserAddMVP.Presenter {
             return false;
         }
     }
-
     @Override
     public boolean checkPassword(String senha, String confirmaSenha) {
         if (senha.equals(confirmaSenha)){
@@ -47,9 +44,4 @@ public class UserAddPresenter implements UserAddMVP.Presenter {
         }
     }
 
-    @Override
-    public void openLogin() {
-        Intent intent = new Intent(view.getContext(), MainActivity.class);
-        view.getContext().startActivity(intent);
-    }
 }

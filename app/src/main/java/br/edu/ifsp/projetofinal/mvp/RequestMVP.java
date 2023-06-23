@@ -11,6 +11,7 @@ public interface RequestMVP {
     interface View{
         Context getContext();
         Bundle getBundle();
+        Request getRequest();
         void setMenu();
         void close();
     }
@@ -21,7 +22,6 @@ public interface RequestMVP {
         boolean isNewRequest();
         void populateList(RecyclerView recyclerView);
         void saveNewRequest(Integer id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status);
-        void saveNewRequest(String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status);
         void updateRequest(String status);
         void deleteRequest();
         void openNewRequest();

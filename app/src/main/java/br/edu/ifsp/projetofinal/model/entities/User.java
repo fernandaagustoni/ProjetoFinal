@@ -1,8 +1,5 @@
 package br.edu.ifsp.projetofinal.model.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
     public int id;
     private String username;

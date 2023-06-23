@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import br.edu.ifsp.projetofinal.model.entities.Request;
-import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.utils.Constant;
 import br.edu.ifsp.projetofinal.utils.UserSession;
 
@@ -37,9 +36,9 @@ public class RequestDaoSQLite implements  IRequestDao{
     }
 
     @Override
-    public void create(Request request) {
+    public boolean create(Request request) {
         ContentValues values = new ContentValues();
-        values.put( Constant.ID_USER, UserSession.getInstance().getUser().getId());
+        values.put(Constant.ID_USER, UserSession.getInstance().getUser().getId());
         values.put(Constant.ORIGEM, request.getOrigem());
         values.put(Constant.DESTINO, request.getDestino());
         values.put(Constant.DATA_VIAGEM, request.getDataViagem());
@@ -52,26 +51,13 @@ public class RequestDaoSQLite implements  IRequestDao{
         long lines = mDatabase
                 .insert(Constant.REQUEST, null, values);
         mDatabase.close();
+        return lines == -1 ? false : true;
     }
     @Override
     public boolean update(String status, Request request) {
         return false;
     }
 
-    @Override
-    public boolean delete(Request request) {
-        return false;
-    }
-
-    @Override
-    public Request findById(String id) {
-        return null;
-    }
-
-    @Override
-    public List<Request> findByUser(User user) {
-        return null;
-    }
 
     @Override
     public List<Request> findAll() {
@@ -84,9 +70,13 @@ public class RequestDaoSQLite implements  IRequestDao{
         Cursor cursor;
 
         String columns[] = new String[]{
+                Constant.DATABASE_ID,
                 Constant.ORIGEM,
                 Constant.DESTINO,
                 Constant.DATA_VIAGEM,
+                Constant.ANEXO_NOTA,
+                Constant.ANEXO_KM_ANTES,
+                Constant.ANEXO_KM_DEPOIS,
                 Constant.STATUS
         };
 

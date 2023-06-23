@@ -45,11 +45,6 @@ public class UserDaoSQLite implements IUserDao {
         return lines == -1 ? false : true;
     }
 
-    @Override
-    public User findByUsername(String username) {
-
-        return null;
-    }
     @SuppressLint("Range")
     @Override
     public boolean validateUser(String username, String password) {

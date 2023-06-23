@@ -5,36 +5,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import br.edu.ifsp.projetofinal.R;
+import br.edu.ifsp.projetofinal.model.entities.Request;
+import br.edu.ifsp.projetofinal.model.entities.User;
+import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
+import br.edu.ifsp.projetofinal.presenter.RequestAddPresenter;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
+import br.edu.ifsp.projetofinal.utils.Constant;
 
 
-public class RequestAddActivity extends AppCompatActivity implements RequestMVP.View, View.OnClickListener{
-    private RequestMVP.Presenter presenter;
+public class RequestAddActivity extends AppCompatActivity implements RequestAddMVP.View, View.OnClickListener{
+    private RequestAddMVP.Presenter presenter;
     private EditText fromEditText;
     private EditText toEditText;
     private TextView dateEditText;
     private EditText attachmentEditText;
     private EditText attachmentKmBEditText;
     private EditText attachmentKmAEditText;
-    private EditText status;
+    private Request request;
     private Button confirmButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_add);
-        presenter = new RequestPresenter(this);
         findViews();
         setListener();
+        presenter = new RequestAddPresenter(this);
         setToolbar();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            request = (Request) bundle.getSerializable(Constant.ORIGEM);
+        }
         setMenu();
     }
     @Override
@@ -44,19 +56,13 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
     }
     @Override
     public Context getContext() {
-        return null;
+        return this;
     }
 
     @Override
     public void onClick(View view) {
         if (view == confirmButton){
-            presenter.saveNewRequest(fromEditText.getText().toString(),
-                    toEditText.getText().toString(),
-                    dateEditText.getText().toString(),
-                    attachmentEditText.getText().toString(),
-                    attachmentKmBEditText.getText().toString(),
-                    attachmentKmAEditText.getText().toString(),
-                    status.getText().toString());
+            saveRequest();
         }
     }
     @Override
@@ -65,10 +71,15 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
     }
 
     @Override
-    public void close() {
-        presenter.deatach();
-        finish();
+    public Request getRequest() {
+        return request;
     }
+
+    @Override
+    public void close() {
+
+    }
+
     private void findViews(){
         fromEditText = findViewById(R.id.edittext_from);
         toEditText = findViewById(R.id.edittext_to);
@@ -76,7 +87,6 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
         attachmentEditText = findViewById(R.id.edittext_attachment);
         attachmentKmBEditText = findViewById(R.id.edittext_attachment_km_b);
         attachmentKmAEditText = findViewById(R.id.edittext_attachment_km_a);
-        status = findViewById(R.id.edittext_status);
         confirmButton = findViewById(R.id.button_save_request);
     }
 
@@ -121,5 +131,18 @@ public class RequestAddActivity extends AppCompatActivity implements RequestMVP.
     @Override
     public void setMenu() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void saveRequest() {
+        Request request = new Request();
+        request.setOrigem(fromEditText.getText().toString());
+        request.setDestino(toEditText.getText().toString());
+        request.setDataViagem(dateEditText.getText().toString());
+        request.setAnexoNotaFiscal(attachmentEditText.getText().toString());
+        request.setAnexoKmAntes(attachmentKmBEditText.getText().toString());
+        request.setAnexoKmDepois(attachmentKmAEditText.getText().toString());
+        request.setStatus("Aguardando aprovação");
+        presenter.saveNewRequest(request);
+        finish();
     }
 }

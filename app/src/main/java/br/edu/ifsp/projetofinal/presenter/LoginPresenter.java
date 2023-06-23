@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
-import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.LoginMVP;
 import br.edu.ifsp.projetofinal.utils.Cryptography;
 import br.edu.ifsp.projetofinal.view.RequestActivity;
@@ -26,7 +25,6 @@ public class LoginPresenter implements LoginMVP.Presenter{
     public boolean autenticate(String username, String password) {
         password = Cryptography.encrypt(password);
         boolean result = userDao.validateUser(username, password);
-        Log.v("testelogin","user " + username + " password " + password );
         if (!result) {
             Log.d("Erro", "Senha Incorreta");
             return false;

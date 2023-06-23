@@ -98,41 +98,6 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_attachment_km_b"
         app:layout_constraintTop_toBottomOf="@+id/edittext_attachment_km_b" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview_status"
-        android:layout_marginTop="100dp"
-        android:hint="@string/hint_status"
-        android:inputType="text"
-        android:padding="8dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/edittext_attachment_km_a"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_attachment_km_a"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_attachment_km_a"/>
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edittext_status"
-        android:editable="false"
-        android:layout_marginTop="0dp"
-        android:inputType="text"
-        android:padding="1dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/textview_status"
-        app:layout_constraintEnd_toEndOf="@+id/textview_status"
-        app:layout_constraintTop_toBottomOf="@+id/textview_status" />
-
-    <SurfaceView android:id="@+id/surface_camera"
-
-        android:layout_width="fill_parent" android:layout_height="10dip"
-
-        android:layout_weight="1">
-
-    </SurfaceView>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

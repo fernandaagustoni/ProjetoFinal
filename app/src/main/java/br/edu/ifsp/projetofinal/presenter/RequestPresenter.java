@@ -3,12 +3,8 @@ package br.edu.ifsp.projetofinal.presenter;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.Date;
-import java.util.stream.Collectors;
-
 import br.edu.ifsp.projetofinal.model.dao.IRequestDao;
 import br.edu.ifsp.projetofinal.model.dao.RequestDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.Request;
@@ -25,7 +21,6 @@ public class RequestPresenter implements RequestMVP.Presenter{
     public Request request;
     public RequestPresenter(RequestMVP.View view){
         this.view = view;
-        request = null;
         requestDao = new RequestDaoSQLite(view.getContext());
     }
     @Override
@@ -44,14 +39,6 @@ public class RequestPresenter implements RequestMVP.Presenter{
     @Override
     public void saveNewRequest(Integer id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
 
-    }
-    @Override
-    public void saveNewRequest(String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
-        Log.v("SaveRequestTest", "Entrou funcao saveNewRequest");
-        request = new Request(origem, destino, dataViagem, anexoNotaFiscal, anexoKmAntes, anexoKmAntes, status);
-        requestDao.create(request);
-        Log.v("SaveRequestTest", "Request criada" + request);
-        view.close();
     }
 
     @Override
@@ -78,7 +65,7 @@ public class RequestPresenter implements RequestMVP.Presenter{
     @Override
     public void populateList(RecyclerView recyclerView) {
         ItemRecyclerAdapter adapter = new
-                ItemRecyclerAdapter(view.getContext(), requestDao.findAll(), this);
+                ItemRecyclerAdapter(view.getContext(), requestDao.findAll(),  this);
         adapter.setClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -91,5 +78,6 @@ public class RequestPresenter implements RequestMVP.Presenter{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
 
 }
