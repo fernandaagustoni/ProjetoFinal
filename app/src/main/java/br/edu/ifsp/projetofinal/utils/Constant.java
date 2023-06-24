@@ -18,4 +18,5 @@ public class Constant {
     public static final String ANEXO_KM_ANTES= "anexo_km_antes";
     public static final String ANEXO_KM_DEPOIS= "anexo_km_depois";
     public static final String ID_USER = "user_id";
+
 }

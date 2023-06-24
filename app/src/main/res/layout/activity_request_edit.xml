@@ -6,4 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".view.RequestEditActivity">
 
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_from"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_from"
+        android:inputType="none"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_to"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_to"
+        android:inputType="none"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_from"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_from"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_date"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_date"
+        android:inputType="none"
+        android:padding="8dp"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_to"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_to"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_to"/>
+
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/imgPhotoKmB"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/imgPhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/imgPhotoKmA"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/imgPhotoKmB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_status"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_status"
+        android:inputType="none"
+        android:padding="8dp"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edittext_to"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_to"
+        app:layout_constraintTop_toBottomOf="@+id/imgPhotoKmA"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_close"
+        android:layout_marginBottom="64dp"
+        android:text="@string/btn_close_request"
+        app:layout_constraintStart_toStartOf="@id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@id/edittext_from"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

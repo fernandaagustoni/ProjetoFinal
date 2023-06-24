@@ -23,7 +23,7 @@ public class RequestDaoSQLite implements  IRequestDao{
 
     public static String createTable(){
         String sql = "CREATE TABLE " + Constant.REQUEST + "(";
-        sql += Constant.DATABASE_ID + " INTEGER PRIMARY KEY, ";
+        sql += Constant.DATABASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
         sql += Constant.ID_USER + " INTEGER, ";
         sql += Constant.ORIGEM + " TEXT NOT NULL, ";
         sql += Constant.DESTINO + " TEXT NOT NULL, ";
@@ -49,6 +49,7 @@ public class RequestDaoSQLite implements  IRequestDao{
         values.put(Constant.ANEXO_KM_ANTES, request.getAnexoKmAntes());
         values.put(Constant.ANEXO_KM_DEPOIS, request.getAnexoKmDepois());
 
+        Log.v("teste create request", "id " + values.get(Constant.DATABASE_ID));
         mDatabase = mHelper.getWritableDatabase();
         long lines = mDatabase
                 .insert(Constant.REQUEST, null, values);
@@ -59,7 +60,6 @@ public class RequestDaoSQLite implements  IRequestDao{
     public boolean update(String status, Request request) {
         return false;
     }
-
 
     @Override
     public List<Request> findAll() {
@@ -112,10 +112,6 @@ public class RequestDaoSQLite implements  IRequestDao{
     }
     @Override
     public List<Request> findByUserId() {
-       /* if (Objects.equals(UserSession.getInstance().getUser().getId(), "")) {
-            List<Request> request = new ArrayList<>();
-            return request;
-        }*/
         List<Request> list = new ArrayList<>();
         Cursor cursor;
         String[] projection = {

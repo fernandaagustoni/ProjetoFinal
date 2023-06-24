@@ -19,12 +19,10 @@ public interface RequestMVP {
     interface Presenter{
         void deatach();
         void updateUI(Intent intent, EditText status);
-        boolean isNewRequest();
         void populateList(RecyclerView recyclerView);
-        void saveNewRequest(Integer id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status);
         void updateRequest(String status);
-        void deleteRequest();
         void openNewRequest();
+        void openRequestAdmin(Request request);
         void openRequest(Request request);
     }
 }

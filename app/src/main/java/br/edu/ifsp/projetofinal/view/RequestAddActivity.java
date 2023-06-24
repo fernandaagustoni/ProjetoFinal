@@ -50,7 +50,7 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
     private String base64Photo_2;
     private String base64Photo_3;
     private Button confirmButton;
-
+    public int id = 0;
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int CAMERA_REQUEST_CODE_2 = 2;
     private static final int CAMERA_REQUEST_CODE_3 = 3;

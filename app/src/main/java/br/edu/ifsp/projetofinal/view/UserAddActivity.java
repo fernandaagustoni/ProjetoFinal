@@ -97,6 +97,8 @@ public class UserAddActivity extends AppCompatActivity implements UserAddMVP.Vie
         user.setPassword(passwordEditText.getText().toString());
         user.setFullname(fullNameEditText.getText().toString());
         user.setEmail(emailEditText.getText().toString());
+        user.setIs_admin(0);
+        //user.setIs_admin(1);
         presenter.registerUser(user);
         finish();
     }

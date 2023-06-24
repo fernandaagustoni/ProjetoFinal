@@ -1,32 +1,35 @@
 package br.edu.ifsp.projetofinal.presenter;
 
-import android.util.Log;
+import android.os.Bundle;
 
 import br.edu.ifsp.projetofinal.model.dao.IRequestDao;
 import br.edu.ifsp.projetofinal.model.dao.RequestDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
+import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
+import br.edu.ifsp.projetofinal.utils.Constant;
 
 
-public class RequestAddPresenter implements RequestAddMVP.Presenter {
-    private RequestAddMVP.View view;
+public class RequestEditPresenter implements RequestEditMVP.Presenter{
+    private RequestEditMVP.View view;
     private IRequestDao requestDao;
     public Request request;
-
-    public RequestAddPresenter(RequestAddMVP.View viewRecept){
-        view = viewRecept;
+    public RequestEditPresenter(RequestEditMVP.View view){
+        this.view = view;
+        request = null;
         requestDao = new RequestDaoSQLite(view.getContext());
     }
 
     @Override
-    public void deatach()  {
-        view = null;
+    public void deatach() {
+
     }
 
+
     @Override
-    public void saveNewRequest(Request request) {
-        Log.v("teste id", "id " + request.getId());
-        requestDao.create(request);
-        view.close();
+    public void saveRequest(String status) {
+
     }
+
+
 }

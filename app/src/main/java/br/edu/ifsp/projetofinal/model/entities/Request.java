@@ -1,6 +1,8 @@
 package br.edu.ifsp.projetofinal.model.entities;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable {
     private int id;
     public String idUser;
     private String origem;

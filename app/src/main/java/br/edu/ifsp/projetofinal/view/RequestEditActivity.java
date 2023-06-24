@@ -2,15 +2,98 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import br.edu.ifsp.projetofinal.R;
+import br.edu.ifsp.projetofinal.model.entities.Request;
+import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
+import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
+import br.edu.ifsp.projetofinal.presenter.RequestEditPresenter;
+import br.edu.ifsp.projetofinal.utils.Constant;
+import br.edu.ifsp.projetofinal.utils.UserSession;
 
-public class RequestEditActivity extends AppCompatActivity {
+public class RequestEditActivity extends AppCompatActivity implements RequestEditMVP.View{
+
+    private RequestEditMVP.Presenter presenter;
+    private EditText fromEditText;
+    private EditText toEditText;
+    private TextView dateEditText;
+    private TextView statusEditText;
+    private ImageView photoImageView;
+    private ImageView photoImageViewKmB;
+    private ImageView photoImageViewKmA;
+    private Button confirmButton;
+    private Request editRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_edit);
+        presenter = new RequestEditPresenter(this);
+        findViews();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            editRequest = (Request) bundle.getSerializable(Constant.REQUEST);
+        }
+        setData();
+    }
+    public void setData() {
+        fromEditText.setText(editRequest.getOrigem());
+        toEditText.setText(editRequest.getDestino());
+        dateEditText.setText(editRequest.getDataViagem());
+        if (editRequest.getAnexoNotaFiscal() != null) {
+            byte[] decodedBytes = Base64.decode(editRequest.getAnexoNotaFiscal(), Base64.DEFAULT);
+            if (decodedBytes.length > 0) {
+                Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                photoImageView.setImageBitmap(decodedBitmap);
+            }
+        }
+        if (editRequest.getAnexoKmAntes() != null) {
+            byte[] decodedBytes_2 = Base64.decode(editRequest.getAnexoKmAntes(), Base64.DEFAULT);
+            if (decodedBytes_2.length > 0) {
+                Bitmap decodedBitmap_2 = BitmapFactory.decodeByteArray(decodedBytes_2, 0, decodedBytes_2.length);
+                photoImageViewKmB.setImageBitmap(decodedBitmap_2);
+            }
+        }
+        if (editRequest.getAnexoKmDepois() != null) {
+            byte[] decodedBytes_3 = Base64.decode(editRequest.getAnexoKmDepois(), Base64.DEFAULT);
+            if (decodedBytes_3.length > 0) {
+                Bitmap decodedBitmap_3 = BitmapFactory.decodeByteArray(decodedBytes_3, 0, decodedBytes_3.length);
+                photoImageViewKmA.setImageBitmap(decodedBitmap_3);
+            }
+        }
+        statusEditText.setText(editRequest.getStatus());
+    }
+    private void findViews(){
+        fromEditText = findViewById(R.id.edittext_from);
+        toEditText = findViewById(R.id.edittext_to);
+        dateEditText = findViewById(R.id.edittext_date);
+        statusEditText = findViewById(R.id.edittext_status);
+        confirmButton = findViewById(R.id.button_close);
+        photoImageView = findViewById(R.id.imgPhoto);
+        photoImageViewKmB = findViewById(R.id.imgPhotoKmB);
+        photoImageViewKmA = findViewById(R.id.imgPhotoKmA);
+    }
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public Bundle getBundle() {
+        return getIntent().getExtras();
+    }
+
+    @Override
+    public void close() {
+
     }
 }
