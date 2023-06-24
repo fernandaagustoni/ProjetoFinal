@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
+import br.edu.ifsp.projetofinal.utils.Constant;
 
 public class RequestActivity extends AppCompatActivity implements RequestMVP.View{
     private RequestMVP.Presenter presenter;
@@ -128,6 +130,7 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
                             break;
 
                         case R.id.nav_item4:
+                            logout();
                             intentItem = new Intent(this,MainActivity.class);
                             startActivity(intentItem);
                             break;
@@ -135,5 +138,14 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
                     drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 });
+    }
+
+    public void logout() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USER_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(Constant.ID_USER);
+        editor.remove(Constant.USERNAME);
+        editor.remove(Constant.PASSWORD);
+        editor.apply();
     }
 }

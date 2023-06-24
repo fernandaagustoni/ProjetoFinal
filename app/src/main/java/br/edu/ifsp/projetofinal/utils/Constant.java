@@ -7,6 +7,7 @@ public class Constant {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String IS_ADMIN = "is_admin";
+    public static final String USER_PREFERENCES = "user_preferences";
     public static final String REQUEST = "request";
     public static final String DATABASE_ID = "Id";
     public static final String ORIGEM = "origem";

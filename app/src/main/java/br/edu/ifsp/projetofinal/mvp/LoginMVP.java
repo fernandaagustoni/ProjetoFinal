@@ -8,7 +8,7 @@ public interface LoginMVP {
     }
     interface Presenter{
         void deatach();
-        boolean autenticate(String username, String password);
+        boolean autenticate(String username, String password, boolean savePreference);
         void openSignUp();
         void openRequestForm();
     }

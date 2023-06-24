@@ -2,6 +2,7 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.mvp.LoginMVP;
 import br.edu.ifsp.projetofinal.presenter.LoginPresenter;
+import br.edu.ifsp.projetofinal.utils.Constant;
 
 public class MainActivity extends AppCompatActivity implements LoginMVP.View{
     private LoginMVP.Presenter presenter;
@@ -28,6 +30,13 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.View{
         presenter = new LoginPresenter(this);
         findViews();
         setListener();
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.USER_PREFERENCES, Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt(Constant.ID_USER, -1);
+        if (userId != -1) {
+            String username = sharedPreferences.getString(Constant.USERNAME, "");
+            String password = sharedPreferences.getString(Constant.PASSWORD, "");
+            presenter.autenticate(username, password, true);
+        }
     }
     @Override
     protected void onDestroy() {
@@ -49,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoginMVP.View{
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (presenter.autenticate(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
+                if (presenter.autenticate(usernameEditText.getText().toString(), passwordEditText.getText().toString(), mPreferences.isChecked())) {
                     Toast.makeText(getContext(), "Usuário logado com Sucesso!", Toast.LENGTH_LONG).show();
                 } else{
                     Toast.makeText(getContext(), "Dados inválidos!", Toast.LENGTH_LONG).show();

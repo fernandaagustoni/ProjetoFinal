@@ -1,6 +1,5 @@
 package br.edu.ifsp.projetofinal.presenter;
 
-import android.util.Log;
 import br.edu.ifsp.projetofinal.model.dao.IRequestDao;
 import br.edu.ifsp.projetofinal.model.dao.RequestDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.Request;
