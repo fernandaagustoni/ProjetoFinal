@@ -7,5 +7,6 @@ public interface IRequestDao {
     boolean create(Request request);
     boolean update(String status, Request request);
     List<Request> findAll();
+    List<Request> findByUserId();
 
 }

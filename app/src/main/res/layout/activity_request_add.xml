@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_to"
         app:layout_constraintTop_toBottomOf="@+id/edittext_to"/>
 
-    <EditText
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_attachment"
@@ -67,8 +67,18 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_date"
         app:layout_constraintTop_toBottomOf="@+id/edittext_date" />
 
-
-    <EditText
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.325" />
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_attachment_km_b"
@@ -83,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_attachment"
         app:layout_constraintTop_toBottomOf="@+id/edittext_attachment" />
 
-    <EditText
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_attachment_km_a"

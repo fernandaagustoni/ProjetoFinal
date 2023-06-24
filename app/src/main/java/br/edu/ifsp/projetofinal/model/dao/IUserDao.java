@@ -6,4 +6,5 @@ import br.edu.ifsp.projetofinal.model.entities.User;
 public interface IUserDao {
     boolean create(User user) throws UserDuplicatedException;
     boolean validateUser(String username, String password);
+    boolean edit(User user);
 }

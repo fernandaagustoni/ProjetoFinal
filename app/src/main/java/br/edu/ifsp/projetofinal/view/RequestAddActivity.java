@@ -1,27 +1,35 @@
 package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.Manifest;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
+
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
-import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
-import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestAddPresenter;
-import br.edu.ifsp.projetofinal.presenter.RequestPresenter;
 import br.edu.ifsp.projetofinal.utils.Constant;
 
 
@@ -30,11 +38,15 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
     private EditText fromEditText;
     private EditText toEditText;
     private TextView dateEditText;
-    private EditText attachmentEditText;
-    private EditText attachmentKmBEditText;
-    private EditText attachmentKmAEditText;
+    private TextView attachmentEditText;
+    private TextView attachmentKmBEditText;
+    private TextView attachmentKmAEditText;
     private Request request;
+    private ImageView photoImageView;
+    private String base64Photo;
     private Button confirmButton;
+
+    private static final int CAMERA_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +100,7 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
         attachmentKmBEditText = findViewById(R.id.edittext_attachment_km_b);
         attachmentKmAEditText = findViewById(R.id.edittext_attachment_km_a);
         confirmButton = findViewById(R.id.button_save_request);
+        photoImageView = findViewById(R.id.imgPhoto);
     }
 
     private void setListener(){
@@ -115,8 +128,37 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
 
 
         });
+        attachmentEditText.setOnClickListener(this::tirarFoto);
+        attachmentKmAEditText.setOnClickListener(this::tirarFoto);
+        attachmentKmBEditText.setOnClickListener(this::tirarFoto);
     }
+    public void tirarFoto(View view) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+        } else {
+            startCamera();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            base64Photo = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            photoImageView.setImageBitmap(photo);
+            //    attachmentEditText.setImageBitmap(photo);
+            //  attachmentKmAEditText.setImageBitmap(photo);
+            //  attachmentKmBEditText.setImageBitmap(photo);
+        }
+    }
+    private void startCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){

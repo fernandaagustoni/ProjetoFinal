@@ -91,4 +91,24 @@ public class UserDaoSQLite implements IUserDao {
         }
         return retorno;
     }
+
+    @Override
+    public boolean edit(User user) {
+        ContentValues values = new ContentValues();
+        values.put(Constant.USERNAME, user.getUsername());
+        values.put(Constant.PASSWORD, user.getPassword());
+        values.put(Constant.FULLNAME, user.getFullname());
+        values.put(Constant.EMAIL, user.getEmail());
+        values.put(Constant.IS_ADMIN, user.isIs_admin());
+        mDatabase = mHelper.getWritableDatabase();
+        int rowsAffected = mDatabase.update(
+                Constant.USER,
+                values,
+                Constant.DATABASE_ID + " = ?",
+                new String[]{String.valueOf(UserSession.getInstance().getUser().getId())}
+        );
+        UserSession.getInstance().setUser(user);
+        mDatabase.close();
+        return rowsAffected > 0;
+    }
 }

@@ -2,6 +2,7 @@ package br.edu.ifsp.projetofinal.model.entities;
 
 public class Request {
     private int id;
+    public String idUser;
     private String origem;
     private String destino;
     private String dataViagem;
@@ -11,8 +12,20 @@ public class Request {
     private String status;
     public Request(){}
 
-    public Request(int id, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+    public Request(int id, String idUser, String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
         this.id = id;
+        this.idUser = idUser;
+        this.origem = origem;
+        this.destino = destino;
+        this.dataViagem = dataViagem;
+        this.anexoNotaFiscal = anexoNotaFiscal;
+        this.anexoKmAntes = anexoKmAntes;
+        this.anexoKmDepois = anexoKmDepois;
+        this.status = status;
+    }
+    public Request(int id,  String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
+        this.id = id;
+        this.idUser = idUser;
         this.origem = origem;
         this.destino = destino;
         this.dataViagem = dataViagem;

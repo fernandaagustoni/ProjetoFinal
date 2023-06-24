@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -104,6 +106,57 @@ public class RequestDaoSQLite implements  IRequestDao{
             list.add(request);
         }
 
+        cursor.close();
+        mDatabase.close();
+        return list;
+    }
+    @Override
+    public List<Request> findByUserId() {
+        if (Objects.equals(UserSession.getInstance().getUser().getId(), "")) {
+            List<Request> request = new ArrayList<>();
+            return request;
+        }
+        List<Request> list = new ArrayList<>();
+        Cursor cursor;
+        String[] projection = {
+                Constant.DATABASE_ID,
+                Constant.ID_USER,
+                Constant.ORIGEM,
+                Constant.DESTINO,
+                Constant.DATA_VIAGEM,
+                Constant.ANEXO_NOTA,
+                Constant.ANEXO_KM_ANTES,
+                Constant.ANEXO_KM_DEPOIS,
+                Constant.STATUS
+        };
+        int userId = UserSession.getInstance().getUser().getId();
+        Log.v("teste findbyuserid","userId " + userId);
+        String selection = Constant.ID_USER + " = ? " + Constant.REQUEST + " = ?";
+        String[] selectionArgs = {String.valueOf(userId), "0", "1"};
+        mDatabase = mHelper.getReadableDatabase();
+        cursor = mDatabase.query(
+                Constant.REQUEST,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(Constant.DATABASE_ID));
+            String idUser = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ID_USER));
+            String origem = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ORIGEM));
+            String destino = cursor.getString(cursor.getColumnIndexOrThrow(Constant.DESTINO));
+            String dataViagem = cursor.getString(cursor.getColumnIndexOrThrow(Constant.DATA_VIAGEM));
+            String anexoNotaFiscal = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_NOTA));
+            String anexoKmAntes = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_KM_ANTES));
+            String anexoKmDepois = cursor.getString(cursor.getColumnIndexOrThrow(Constant.ANEXO_KM_DEPOIS));
+            String status = cursor.getString(cursor.getColumnIndexOrThrow(Constant.STATUS));
+            Request requestInsert = new Request(id, idUser, origem, destino, dataViagem, anexoNotaFiscal, anexoKmAntes, anexoKmDepois, status);
+            list.add(requestInsert);
+        }
         cursor.close();
         mDatabase.close();
         return list;

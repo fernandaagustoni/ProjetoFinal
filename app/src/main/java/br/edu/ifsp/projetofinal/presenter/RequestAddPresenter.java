@@ -28,6 +28,9 @@ public class RequestAddPresenter implements RequestAddMVP.Presenter {
         Log.v("SaveRequestTest", "Entrou funcao FROm saveNewRequest " + request.getOrigem());
         Log.v("SaveRequestTest", "Entrou funcao DATE saveNewRequest " + request.getDataViagem());
         Log.v("SaveRequestTest", "Entrou funcao STATUS saveNewRequest " + request.getStatus());
+        Log.v("SaveRequestTest", "Entrou funcao DATE saveNewRequest " + request.getDataViagem());
+        Log.v("SaveRequestTest", "Entrou funcao ANEXOS saveNewRequest " + request.getAnexoKmAntes());
+        Log.v("SaveRequestTest", "Entrou funcao ANEXOS saveNewRequest " + request.getAnexoKmDepois());
         requestDao.create(request);
         Log.v("SaveRequestTest", "Request criada" + request);
         view.close();
