@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.Manifest;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,15 +39,22 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
     private EditText fromEditText;
     private EditText toEditText;
     private TextView dateEditText;
-    private TextView attachmentEditText;
-    private TextView attachmentKmBEditText;
-    private TextView attachmentKmAEditText;
+    private Button attachmentEditText;
+    private Button attachmentKmBEditText;
+    private Button attachmentKmAEditText;
     private Request request;
     private ImageView photoImageView;
+    private ImageView photoImageViewKmB;
+    private ImageView photoImageViewKmA;
     private String base64Photo;
+    private String base64Photo_2;
+    private String base64Photo_3;
     private Button confirmButton;
 
     private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int CAMERA_REQUEST_CODE_2 = 2;
+    private static final int CAMERA_REQUEST_CODE_3 = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +62,6 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
         findViews();
         setListener();
         presenter = new RequestAddPresenter(this);
-        setToolbar();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             request = (Request) bundle.getSerializable(Constant.ORIGEM);
@@ -75,6 +82,8 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
     public void onClick(View view) {
         if (view == confirmButton){
             saveRequest();
+        }if(view == attachmentEditText || view == attachmentKmAEditText || view == attachmentKmBEditText){
+            tirarFoto(view);
         }
     }
     @Override
@@ -86,6 +95,10 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
     public Request getRequest() {
         return request;
     }
+    @Override
+    public String returnBase64() {
+        return this.base64Photo;
+    }
 
     @Override
     public void close() {
@@ -96,11 +109,13 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
         fromEditText = findViewById(R.id.edittext_from);
         toEditText = findViewById(R.id.edittext_to);
         dateEditText = findViewById(R.id.edittext_date);
-        attachmentEditText = findViewById(R.id.edittext_attachment);
-        attachmentKmBEditText = findViewById(R.id.edittext_attachment_km_b);
-        attachmentKmAEditText = findViewById(R.id.edittext_attachment_km_a);
+        attachmentEditText = findViewById(R.id.button_attachment);
+        attachmentKmBEditText = findViewById(R.id.button_attachment_km_b);
+        attachmentKmAEditText = findViewById(R.id.button_attachment_km_a);
         confirmButton = findViewById(R.id.button_save_request);
         photoImageView = findViewById(R.id.imgPhoto);
+        photoImageViewKmB = findViewById(R.id.imgPhotoKmB);
+        photoImageViewKmA = findViewById(R.id.imgPhotoKmA);
     }
 
     private void setListener(){
@@ -124,19 +139,22 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
                         }, year, month, day);
                 datePickerDialog.show();
             }
-
-
-
         });
-        attachmentEditText.setOnClickListener(this::tirarFoto);
-        attachmentKmAEditText.setOnClickListener(this::tirarFoto);
-        attachmentKmBEditText.setOnClickListener(this::tirarFoto);
+        attachmentEditText.setOnClickListener(this);
+        attachmentKmAEditText.setOnClickListener(this);
+        attachmentKmBEditText.setOnClickListener(this);
     }
     public void tirarFoto(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
         } else {
-            startCamera();
+            if(view == attachmentEditText){
+                startCamera();
+            }else if(view == attachmentKmBEditText){
+                startCamera2();
+            }else if(view == attachmentKmAEditText){
+                startCamera3();
+            }
         }
     }
     @Override
@@ -150,14 +168,36 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
             byte[] byteArray = stream.toByteArray();
             base64Photo = Base64.encodeToString(byteArray, Base64.DEFAULT);
             photoImageView.setImageBitmap(photo);
-            //    attachmentEditText.setImageBitmap(photo);
-            //  attachmentKmAEditText.setImageBitmap(photo);
-            //  attachmentKmBEditText.setImageBitmap(photo);
+        }
+        else if (requestCode == CAMERA_REQUEST_CODE_2 && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            base64Photo_2 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            photoImageViewKmB.setImageBitmap(photo);
+        }
+       else if (requestCode == CAMERA_REQUEST_CODE_3 && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            base64Photo_3 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            photoImageViewKmA.setImageBitmap(photo);
         }
     }
+
     private void startCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+    }
+    private void startCamera2() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE_2);
+    }
+    private void startCamera3() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE_3);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -165,9 +205,6 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-    private void setToolbar(){
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -180,9 +217,9 @@ public class RequestAddActivity extends AppCompatActivity implements RequestAddM
         request.setOrigem(fromEditText.getText().toString());
         request.setDestino(toEditText.getText().toString());
         request.setDataViagem(dateEditText.getText().toString());
-        request.setAnexoNotaFiscal(attachmentEditText.getText().toString());
-        request.setAnexoKmAntes(attachmentKmBEditText.getText().toString());
-        request.setAnexoKmDepois(attachmentKmAEditText.getText().toString());
+        request.setAnexoNotaFiscal(base64Photo);
+        request.setAnexoKmAntes(base64Photo_2);
+        request.setAnexoKmDepois(base64Photo_3);
         request.setStatus("Aguardando aprovação");
         presenter.saveNewRequest(request);
         finish();

@@ -65,11 +65,11 @@ public class RequestPresenter implements RequestMVP.Presenter{
     @Override
     public void populateList(RecyclerView recyclerView) {
         ItemRecyclerAdapter adapter = new
-                ItemRecyclerAdapter(view.getContext(), requestDao.findAll(),  this);
+                ItemRecyclerAdapter(view.getContext(), requestDao.findByUserId(),  this);
         adapter.setClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                request = requestDao.findAll().get(position);
+                request = requestDao.findByUserId().get(position);
                 openRequest(request);
             }
         });
