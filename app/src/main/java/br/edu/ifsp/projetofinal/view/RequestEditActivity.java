@@ -1,5 +1,6 @@
 package br.edu.ifsp.projetofinal.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -7,20 +8,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
+import br.edu.ifsp.projetofinal.model.entities.User;
 import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
 import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestEditPresenter;
 import br.edu.ifsp.projetofinal.utils.Constant;
 import br.edu.ifsp.projetofinal.utils.UserSession;
 
-public class RequestEditActivity extends AppCompatActivity implements RequestEditMVP.View{
+public class RequestEditActivity extends AppCompatActivity implements RequestEditMVP.View, View.OnClickListener{
 
     private RequestEditMVP.Presenter presenter;
     private EditText fromEditText;
@@ -30,7 +35,7 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
     private ImageView photoImageView;
     private ImageView photoImageViewKmB;
     private ImageView photoImageViewKmA;
-    private Button confirmButton;
+    private Button closeButton;
     private Request editRequest;
 
     @Override
@@ -44,6 +49,8 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
             editRequest = (Request) bundle.getSerializable(Constant.REQUEST);
         }
         setData();
+        setListener();
+        setMenu();
     }
     public void setData() {
         fromEditText.setText(editRequest.getOrigem());
@@ -77,11 +84,26 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
         toEditText = findViewById(R.id.edittext_to);
         dateEditText = findViewById(R.id.edittext_date);
         statusEditText = findViewById(R.id.edittext_status);
-        confirmButton = findViewById(R.id.button_close);
+        closeButton = findViewById(R.id.button_close);
         photoImageView = findViewById(R.id.imgPhoto);
         photoImageViewKmB = findViewById(R.id.imgPhotoKmB);
         photoImageViewKmA = findViewById(R.id.imgPhotoKmA);
     }
+    private void setListener(){
+        closeButton.setOnClickListener(this);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void setMenu() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     @Override
     public Context getContext() {
         return this;
@@ -94,6 +116,16 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
 
     @Override
     public void close() {
-
+    }
+    public void updateStatus(Request editRequest) {
+        editRequest.setStatus("Encerrado");
+        presenter.updateRequest(editRequest);
+        finish();
+    }
+    @Override
+    public void onClick(View view) {
+        if (view == closeButton){
+            updateStatus(editRequest);
+        }
     }
 }

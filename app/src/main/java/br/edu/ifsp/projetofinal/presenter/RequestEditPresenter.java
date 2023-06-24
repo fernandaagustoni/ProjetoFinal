@@ -22,13 +22,12 @@ public class RequestEditPresenter implements RequestEditMVP.Presenter{
 
     @Override
     public void deatach() {
-
     }
 
-
     @Override
-    public void saveRequest(String status) {
-
+    public boolean updateRequest(Request request) {
+        requestDao.update(request);
+        return true;
     }
 
 

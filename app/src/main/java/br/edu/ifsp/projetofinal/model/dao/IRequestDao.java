@@ -5,7 +5,7 @@ import br.edu.ifsp.projetofinal.model.entities.Request;
 
 public interface IRequestDao {
     boolean create(Request request);
-    boolean update(String status, Request request);
+    boolean update(Request request);
     List<Request> findAll();
     List<Request> findByUserId();
 

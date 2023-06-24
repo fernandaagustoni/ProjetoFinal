@@ -93,10 +93,6 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
             }
         });
     }
-    @Override
-    public void setMenu() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
     public void showMenu() {
         actionBarDrawerToggle = new ActionBarDrawerToggle(

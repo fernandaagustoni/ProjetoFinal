@@ -57,8 +57,16 @@ public class RequestDaoSQLite implements  IRequestDao{
         return lines == -1 ? false : true;
     }
     @Override
-    public boolean update(String status, Request request) {
-        return false;
+    public boolean update(Request request) {
+            ContentValues values = new ContentValues();
+         values.put(Constant.STATUS, request.getStatus());
+        String whereClause = Constant.DATABASE_ID + " = ?";
+        String[] whereArgs = {String.valueOf(request.getId())};
+
+        mDatabase = mHelper.getWritableDatabase();
+        mDatabase.update(Constant.REQUEST, values, whereClause, whereArgs);
+        mDatabase.close();
+return true;
     }
 
     @Override

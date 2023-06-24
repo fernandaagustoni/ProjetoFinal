@@ -12,15 +12,12 @@ public interface RequestMVP {
         Context getContext();
         Bundle getBundle();
         Request getRequest();
-        void setMenu();
         void close();
     }
 
     interface Presenter{
         void deatach();
-        void updateUI(Intent intent, EditText status);
         void populateList(RecyclerView recyclerView);
-        void updateRequest(String status);
         void openNewRequest();
         void openRequestAdmin(Request request);
         void openRequest(Request request);

@@ -31,16 +31,6 @@ public class RequestPresenter implements RequestMVP.Presenter{
         this.view = null;
     }
     @Override
-    public void updateUI(Intent intent, EditText status) {
-
-    }
-
-    @Override
-    public void updateRequest(String status) {
-
-    }
-
-    @Override
     public void openNewRequest() {
         Intent intent = new Intent(view.getContext(), RequestAddActivity.class);
         view.getContext().startActivity(intent);
