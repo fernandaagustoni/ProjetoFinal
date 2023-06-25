@@ -1,9 +1,7 @@
 package br.edu.ifsp.projetofinal.mvp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import androidx.recyclerview.widget.RecyclerView;
 import br.edu.ifsp.projetofinal.model.entities.Request;
 

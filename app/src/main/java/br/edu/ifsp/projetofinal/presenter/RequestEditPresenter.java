@@ -1,14 +1,9 @@
 package br.edu.ifsp.projetofinal.presenter;
 
-import android.os.Bundle;
-
 import br.edu.ifsp.projetofinal.model.dao.IRequestDao;
 import br.edu.ifsp.projetofinal.model.dao.RequestDaoSQLite;
 import br.edu.ifsp.projetofinal.model.entities.Request;
-import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
 import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
-import br.edu.ifsp.projetofinal.utils.Constant;
-
 
 public class RequestEditPresenter implements RequestEditMVP.Presenter{
     private RequestEditMVP.View view;
@@ -29,6 +24,5 @@ public class RequestEditPresenter implements RequestEditMVP.Presenter{
         requestDao.update(request);
         return true;
     }
-
 
 }

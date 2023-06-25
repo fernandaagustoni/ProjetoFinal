@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,16 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
-import br.edu.ifsp.projetofinal.model.entities.User;
-import br.edu.ifsp.projetofinal.mvp.RequestAddMVP;
 import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
 import br.edu.ifsp.projetofinal.presenter.RequestEditPresenter;
 import br.edu.ifsp.projetofinal.utils.Constant;
-import br.edu.ifsp.projetofinal.utils.UserSession;
 
 public class RequestEditActivity extends AppCompatActivity implements RequestEditMVP.View, View.OnClickListener{
 
@@ -52,6 +46,33 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
         setListener();
         setMenu();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+    @Override
+    protected void onDestroy() {
+        presenter.deatach();
+        super.onDestroy();
+    }
+
     public void setData() {
         fromEditText.setText(editRequest.getOrigem());
         toEditText.setText(editRequest.getDestino());
@@ -118,7 +139,7 @@ public class RequestEditActivity extends AppCompatActivity implements RequestEdi
     public void close() {
     }
     public void updateStatus(Request editRequest) {
-        editRequest.setStatus("Encerrado");
+        editRequest.setStatus("ENCERRADO");
         presenter.updateRequest(editRequest);
         finish();
     }

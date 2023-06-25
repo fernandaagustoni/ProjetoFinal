@@ -24,7 +24,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         switch (oldVersion){
             case 1:
-                //renomeia a table user para article_old
                 sql = "ALTER TABLE " + Constant.USER;
                 sql += " RENAME TO " + Constant.USER + "_old";
                 db.execSQL(sql);

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
-import br.edu.ifsp.projetofinal.mvp.LoginMVP;
 import br.edu.ifsp.projetofinal.mvp.RequestMVP;
 import br.edu.ifsp.projetofinal.view.RecyclerViewItemClickListener;
 

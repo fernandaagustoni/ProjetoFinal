@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import br.edu.ifsp.projetofinal.model.entities.Request;
 
 public interface RequestEditMVP {

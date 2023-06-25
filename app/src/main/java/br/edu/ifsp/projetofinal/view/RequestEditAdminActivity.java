@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import br.edu.ifsp.projetofinal.R;
 import br.edu.ifsp.projetofinal.model.entities.Request;
 import br.edu.ifsp.projetofinal.mvp.RequestEditMVP;
@@ -48,6 +46,33 @@ public class RequestEditAdminActivity extends AppCompatActivity implements Reque
         setListener();
         setMenu();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+    @Override
+    protected void onDestroy() {
+        presenter.deatach();
+        super.onDestroy();
+    }
+
     @Override
     public void onClick(View view) {
         if (view == approveButton){
@@ -57,12 +82,12 @@ public class RequestEditAdminActivity extends AppCompatActivity implements Reque
         }
     }
     public void updateStatusApproved(Request editRequest) {
-        editRequest.setStatus("Aprovado");
+        editRequest.setStatus("APROVADO");
         presenter.updateRequest(editRequest);
         finish();
     }
     public void updateStatusReject(Request editRequest) {
-        editRequest.setStatus("Rejeitado");
+        editRequest.setStatus("REJEITADO");
         presenter.updateRequest(editRequest);
         finish();
     }

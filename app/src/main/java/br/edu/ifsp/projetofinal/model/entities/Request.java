@@ -27,7 +27,6 @@ public class Request implements Serializable {
     }
     public Request(int id,  String origem, String destino, String dataViagem, String anexoNotaFiscal, String anexoKmAntes, String anexoKmDepois, String status) {
         this.id = id;
-        this.idUser = idUser;
         this.origem = origem;
         this.destino = destino;
         this.dataViagem = dataViagem;

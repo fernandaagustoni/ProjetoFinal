@@ -47,6 +47,23 @@ public class RequestActivity extends AppCompatActivity implements RequestMVP.Vie
         super.onDestroy();
     }
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
     public Context getContext() {
         return this;
     }

@@ -10,7 +10,6 @@ public interface RequestAddMVP {
         Bundle getBundle();
         void setMenu();
         Request getRequest();
-        String returnBase64();
         void close();
     }
     interface Presenter{

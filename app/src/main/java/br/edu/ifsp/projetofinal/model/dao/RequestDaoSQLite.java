@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,15 +57,15 @@ public class RequestDaoSQLite implements  IRequestDao{
     }
     @Override
     public boolean update(Request request) {
-            ContentValues values = new ContentValues();
-         values.put(Constant.STATUS, request.getStatus());
+        ContentValues values = new ContentValues();
+        values.put(Constant.STATUS, request.getStatus());
         String whereClause = Constant.DATABASE_ID + " = ?";
         String[] whereArgs = {String.valueOf(request.getId())};
 
         mDatabase = mHelper.getWritableDatabase();
         mDatabase.update(Constant.REQUEST, values, whereClause, whereArgs);
         mDatabase.close();
-return true;
+        return true;
     }
 
     @Override

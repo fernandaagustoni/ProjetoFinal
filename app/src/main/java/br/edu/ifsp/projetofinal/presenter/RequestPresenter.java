@@ -2,7 +2,6 @@ package br.edu.ifsp.projetofinal.presenter;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import br.edu.ifsp.projetofinal.model.dao.IRequestDao;
@@ -16,7 +15,6 @@ import br.edu.ifsp.projetofinal.view.RequestAddActivity;
 import br.edu.ifsp.projetofinal.view.RequestEditActivity;
 import br.edu.ifsp.projetofinal.view.RequestEditAdminActivity;
 import br.edu.ifsp.projetofinal.view.adapter.ItemRecyclerAdapter;
-
 
 public class RequestPresenter implements RequestMVP.Presenter{
     private RequestMVP.View view;

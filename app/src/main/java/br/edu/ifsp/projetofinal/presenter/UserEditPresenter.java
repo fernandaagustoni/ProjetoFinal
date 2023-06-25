@@ -1,8 +1,6 @@
 package br.edu.ifsp.projetofinal.presenter;
 
 import android.util.Log;
-import android.widget.Toast;
-
 import java.util.Objects;
 import br.edu.ifsp.projetofinal.model.dao.IUserDao;
 import br.edu.ifsp.projetofinal.model.dao.UserDaoSQLite;
