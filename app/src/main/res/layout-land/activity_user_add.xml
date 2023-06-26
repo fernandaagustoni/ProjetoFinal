@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_interface"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5"
+    android:id="@+id/new_user_land"
+    tools:context=".view.UserAddActivity">
+
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_full_name"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_fullname"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/new_user_land"
+        app:layout_constraintEnd_toEndOf="@+id/new_user_land"
+        app:layout_constraintTop_toTopOf="@+id/new_user_land"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_email"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_email"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edittext_full_name"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_full_name"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_full_name"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_username"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_username"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edittext_email"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_email"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_email"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_password"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintTop_toBottomOf="@id/edittext_new_username" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_new_confirm_password"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_password_confirmation"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintTop_toBottomOf="@id/edittext_new_password" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_save_user"
+        android:layout_marginBottom="5dp"
+        android:text="@string/btn_save_user"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/edittext_new_username"
+        app:layout_constraintEnd_toEndOf="@id/edittext_new_username"
+        app:layout_constraintBottom_toBottomOf="@+id/new_user_land" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

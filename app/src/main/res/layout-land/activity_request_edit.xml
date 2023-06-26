@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/edit_request_land"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5"
+    android:background="@color/app_background_interface"
+    tools:context=".view.RequestEditActivity">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_from"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="55dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_from"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edit_request_land"
+        app:layout_constraintTop_toTopOf="@+id/edit_request_land"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_to"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_to"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/edittext_from"
+        app:layout_constraintTop_toTopOf="@+id/edit_request_land"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_date"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_date"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edittext_from"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_from"/>
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_attachment"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_attachment"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_status"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_status" />
+
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintStart_toStartOf="@+id/button_attachment"
+        app:layout_constraintTop_toBottomOf="@+id/button_attachment" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_status"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_status"
+        android:inputType="none"
+        android:padding="8dp"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edittext_to"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_to"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_to"/>
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_attachment_km_b"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_attachment_km_b"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/edittext_date"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_date"/>
+
+    <ImageView
+        android:id="@+id/imgPhotoKmB"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/button_attachment_km_b"
+        app:layout_constraintTop_toBottomOf="@+id/button_attachment_km_b"/>
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_attachment_km_a"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="55dp"
+        android:background="@drawable/custom_edittext"
+        android:hint="@string/hint_attachment_km_a"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_attachment_km_b"
+        app:layout_constraintBottom_toBottomOf="@+id/button_attachment_km_b" />
+
+    <ImageView
+        android:id="@+id/imgPhotoKmA"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@+id/button_attachment_km_a"
+        app:layout_constraintTop_toBottomOf="@+id/button_attachment_km_a"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_close"
+        android:layout_marginBottom="10dp"
+        android:text="@string/btn_close_request"
+        app:layout_constraintStart_toStartOf="@id/edittext_from"
+        app:layout_constraintEnd_toEndOf="@id/edittext_to"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
